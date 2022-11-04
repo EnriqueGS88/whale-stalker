@@ -1,8 +1,13 @@
-# Whale Stalker
+# Whale Stalker 🐳
 
 ### Select your whale and stalk it
 
 ## Installation
+
+```sh
+git clone https://github.com/EnriqueGS88/whale-stalker.git
+npm i
+```
 
 ## Usage
 
