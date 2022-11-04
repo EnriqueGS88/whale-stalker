@@ -1,0 +1,23 @@
+{
+  "name": "whale-stalker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnriqueGS88/whale-stalker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnriqueGS88/whale-stalker/issues"
+  },
+  "homepage": "https://github.com/EnriqueGS88/whale-stalker#readme",
+  "dependencies": {
+    "puppeteer": "^19.2.2"
+  }
+}
