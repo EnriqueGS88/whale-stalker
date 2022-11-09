@@ -1,117 +1,62 @@
-// Get all fees produced per protocol from cryptofees.info
-// Save output in a module.exports Array Format
+/*
+    Scrape all Recommendations per LOB and per Value Driver
+    Check if Recommendation Type tab does even exist
+    Save scraped data into arrays
+    Export arrays results in a CSV under ./output
+*/
 
 const puppeteer = require('puppeteer');
-const { convertArrayToCSV } = require('convert-array-to-csv');
-const converter = require('convert-array-to-csv');
-const fs = require('fs-extra');
-// const listOfDates = require('./listOfDates');
-// const timeoutsValues = require('./timeoutsValues');
+// const splitArray = require('./utils/splitArray')
+// const utils = require('./utils/utilities');
+// const { convertArrayToCSV } = require('convert-array-to-csv');
+// const converter = require('convert-array-to-csv');
+const time = require('./utils/getTime');
+// const selector = require('./QAselectors')
 require('dotenv').config();
-const USERNAME = process.env.ETHERSCAN_APIKEY;
 
-console.log(USERNAME)
-debugger
-// URLs to scrape
-// const cryptofeesURL = `https://cryptofees.info/history/2021-11-02`;
-const crunchbase = `https://www.crunchbase.com/organization/rapidapi`;
+// URL and logins for QA system
+const bpiURL =      `https://www.crunchbase.com/organization/rapidapi`;;
+// const username =    process.env.QAUSER;
+// const psswd =       process.env.QAPASSWORD;
+// const adminURL =    process.env.QANEWADMINURL;
 
-// const header = ['date', 'protocol', 'daily_fees_usd'];
+// const header = [
+//     'entryID',
+//     'industry',
+//     'lob',
+//     'valueDriver',
+//     'categoryID',
+//     'typeID',
+//     'recomms',
+// ];
 
-// Main Async function to scrape cryptofees.info
-async function getPrices(){
+
+// Main Async function to scrape
+async function getObjects(){
 
     const browser = await puppeteer.launch(
         {   
             headless: false,
             defaultViewport: {
-                width: 1400,
+                width: 1700,
                 height: 900,
                 deviceScaleFactor: 1,
-            }
+            },
+            slowMo:30
         }
     );
 
-    const page = await browser.newPage();
+    const context = await browser.createIncognitoBrowserContext();
+    const page = await context.newPage();
+    let startTime = time.start;
+    console.log("Start Scraper at :",startTime);
 
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
+    await page.goto(bpiURL);
 
-        if ( ['image','stylesheet','font'].includes(request.resourceType() ) ) {
-            request.abort();
-        } else {
-            request.continue();
-        }
-    })
+    console.log( page.url() );
 
-    await page.goto(crunchbase);
+    await page.close();
 
-
-    let historyPrices = [];
-
-    // Loop to get the protocol name and fees from 2 selectors
-    // Fist loop to go through all the dates
-    // for (let i = 0; i<listOfDates.length-1; i++) {
-
-    //     await page.waitForTimeout(timeoutsValues[i]);
-
-    //     // scrape the top 10 protocols in each date
-    //     let topList = 10;
-
-    //     // This loop to go through the top protocols
-    //     // i = picks the date from listOfDates
-    //     for ( let k = 2; k < topList+2 ; k++ ) {
-            
-    //         const nameSelector = `#__next > div > main > div.jsx-2013905549.list > a:nth-child(${k}) > div.jsx-166918656.name > div`;
-    //         const feesSelector = `#__next > div > main > div.jsx-2013905549.list > a:nth-child(${k}) > div:nth-child(2)`;
-
-    //         let date = listOfDates[i];
-    //         let protocol = await page.$eval(nameSelector, element => element.innerText);
-    //         let formatProtocol = protocol.replaceAll(' ', '_').replaceAll('.', '_');
-    //         let fees = await page.$eval(feesSelector, element => element.innerText);
-    //         let formatted_fees = fees.replaceAll(',', '').replace('$', '');
-    //         let fees_usd = formatted_fees.slice(0, (formatted_fees.length-3));
-
-    //         // Use the following snippet instead to prepare a CSV output
-    //         let subArray = [];
-    //         subArray.push(date);
-    //         subArray.push(formatProtocol);
-    //         subArray.push(fees_usd);            
-    //         historyPrices.push(subArray);
-            
-    //     }    
-    //     // console.log(historyPrices);
-    // }
-
-    // Build string output
-    const outputScrape = "module.exports = " + JSON.stringify( historyPrices ) + " ";
-    console.log(outputScrape);
-
-    // const csvFromArrayOfArrays = convertArrayToCSV(historyPrices, {
-    //     header,
-    //     separator: ','
-    // });
-    
-    async function example(f) {
-        try{
-            await fs.outputFile(f, outputScrape);
-            const data = await fs.readFile(f, 'utf8');
-            // console.log(data);
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    const scrapeTime = new Date().toLocaleDateString()
-    .replaceAll('/', '')
-    .replaceAll(':', '')
-    .replaceAll(', ', '_');
-
-    let file = `./output/cryptofees_scrape_${scrapeTime}.js`;
-    example(file);
-
-    await browser.close();
-    
 }
 
-getPrices();
+getObjects();
