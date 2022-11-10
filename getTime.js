@@ -1,4 +1,4 @@
-module.exports = {
+export const time = {
     start: new Date().toLocaleString().replace(',',''),
     end: new Date().toLocaleString().replace(',',''),
     fileID: new Date().toLocaleString().replaceAll('/','').replaceAll(':','').replaceAll(', ','_')

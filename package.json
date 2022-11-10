@@ -1,8 +1,9 @@
 {
   "name": "whale-stalker",
   "version": "1.0.0",
-  "description": "",
+  "description": "```sh\r git clone https://github.com/EnriqueGS88/whale-stalker.git\r npm i\r ```",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,9 +19,6 @@
   },
   "homepage": "https://github.com/EnriqueGS88/whale-stalker#readme",
   "dependencies": {
-    "convert-array-to-csv": "^2.0.0",
-    "dotenv": "^16.0.3",
-    "fs-extra": "^10.1.0",
     "puppeteer": "^19.2.2"
   }
 }
