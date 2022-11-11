@@ -68,7 +68,15 @@ import { selectors } from './selectors.js';
 
         const fundsRaised = await page.$eval( selectors.fundingAmount, e => e.innerText );
 
-        projectFunds.push( time.fileID, companies[i], fundsRaised );
+        const convertToUSD = ( text ) => {
+            
+
+        };
+
+        const description = await page.$eval( selectors.description, e => e.innerText );
+        console.log( description );
+
+        projectFunds.push( time.fileID, companies[i], fundsRaised, description );
 
         fundsByDate.push( projectFunds ); 
         
