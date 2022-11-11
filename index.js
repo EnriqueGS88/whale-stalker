@@ -43,6 +43,7 @@ import { selectors } from './selectors.js';
 
     for ( let i=0; i < companies.length; i++ ) {
 
+        const investmentsURL = `https://www.crunchbase.com/organization/${ companies[i] }/recent_investments`
 
         const crunchbase = `https://www.crunchbase.com/organization/${ companies[i] }`;      
         
@@ -60,7 +61,6 @@ import { selectors } from './selectors.js';
             
         const context = await browser.createIncognitoBrowserContext();
         const page = await context.newPage();
-        let startTime = time.start;
         
         await page.goto( crunchbase );
         
