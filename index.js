@@ -70,13 +70,29 @@ import { selectors } from './selectors.js';
 
         const convertToUSD = ( text ) => {
             
+            // if K = * 1000
+            // if EUR = * 1.1
+            // if EUR = delete sign
+            // if $ = delete sign
+            // if .  = move decimal
+
+           let noDollar = text.replace( '$', '' );
+
+           let thousands = noDollar.replace( 'K', '000' );
+           let millions = thousands.replace( 'M', '000000');
+           let millionsWithoutDecimals = millions.replace( '.', '' );
+           
+           let value = Number( millionsWithoutDecimals );
+           return value;
 
         };
+        const fundsUSD = convertToUSD( fundsRaised );
+        console.log( fundsUSD );
 
         const description = await page.$eval( selectors.description, e => e.innerText );
         console.log( description );
 
-        projectFunds.push( time.fileID, companies[i], fundsRaised, description );
+        projectFunds.push( time.fileID, companies[i], fundsRaised, fundsUSD, description );
 
         fundsByDate.push( projectFunds ); 
         
