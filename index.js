@@ -13,10 +13,12 @@
 // const time = require('./utils/getTime');
 import { companies } from './companies.js';
 import puppeteer from 'puppeteer';
+import { convertArrayToCSV } from 'convert-array-to-csv';
+import converter from 'convert-array-to-csv';
 import { time } from './getTime.js';
 import { selectors } from './selectors.js';
 
-// const selector = require('./QAselectors')
+
 // require('dotenv').config();
 
 // URL and logins for QA system
@@ -24,20 +26,19 @@ import { selectors } from './selectors.js';
 // const psswd =       process.env.QAPASSWORD;
 // const adminURL =    process.env.QANEWADMINURL;
 
-// const header = [
-    //     'entryID',
-    //     'industry',
-    //     'lob',
-    //     'valueDriver',
-    //     'categoryID',
-    //     'typeID',
-    //     'recomms',
-    // ];
+const header = [
+        'date',
+        'company',
+        'amountText',
+        'amountUSD',
+        'description',
+    ];
     
     
     
 // Main Async function to scrape
  async function getObjects(){
+    
 
     let fundsByDate = [ ];
 
@@ -94,9 +95,23 @@ import { selectors } from './selectors.js';
 
         projectFunds.push( time.fileID, companies[i], fundsRaised, fundsUSD, description );
 
+        // This array will be converted into CSV
         fundsByDate.push( projectFunds ); 
+
+        // Convert Array of Arrays into CSV
+        const csvFromArray = convertArrayToCSV( fundsByDate, {
+            header,
+            separator: ','
+        });
+
+        console.log( csvFromArray );
+
+        // Store CSV data into a file in ./output
+
+
+
         
-        console.log( page.url() );        
+        // console.log( page.url() );        
         await page.close();
         await browser.close();
         

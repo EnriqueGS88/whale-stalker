@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/EnriqueGS88/whale-stalker#readme",
   "dependencies": {
+    "convert-array-to-csv": "^2.0.0",
     "puppeteer": "^19.2.2"
   }
 }
