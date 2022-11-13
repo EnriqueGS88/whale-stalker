@@ -79,7 +79,8 @@ const header = [
             // if $ = delete sign
             // if .  = move decimal
 
-           let noDollar = text.replace( '$', '' );
+            let noEuro = text.replace('€', '');
+           let noDollar = noEuro.replace( '$', '' );
 
            let thousands = noDollar.replace( 'K', '000' );
            let millions = thousands.replace( 'M', '000000');
