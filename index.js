@@ -14,9 +14,11 @@
 import { companies } from './companies.js';
 import puppeteer from 'puppeteer';
 import { convertArrayToCSV } from 'convert-array-to-csv';
+import fs from 'fs-extra';
 import converter from 'convert-array-to-csv';
 import { time } from './getTime.js';
 import { selectors } from './selectors.js';
+// import { fstat } from 'fs-extra';
 
 
 // require('dotenv').config();
@@ -107,8 +109,18 @@ const header = [
         console.log( csvFromArray );
 
         // Store CSV data into a file in ./output
+        async function saveFile ( f, d ) {
+            try{
+                await fs.outputFile( f, d );
 
+            } catch ( e ) {
+                console.error( e )
+            }
 
+        }
+
+        let filePath = `./output/crunchbase_${time.fileID}`;
+        saveFile( filePath, csvFromArray );
 
         
         // console.log( page.url() );        
