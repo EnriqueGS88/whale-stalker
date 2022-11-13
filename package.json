@@ -21,6 +21,8 @@
   "dependencies": {
     "convert-array-to-csv": "^2.0.0",
     "fs-extra": "^10.1.0",
+    "google-auth-library": "^8.7.0",
+    "googleapis": "^109.0.1",
     "puppeteer": "^19.2.2"
   }
 }

@@ -1,5 +1,3 @@
-
-
 export function exchangeRate(str) {
     if (str.indexOf('€') != -1) {
         return 1.1

@@ -2,3 +2,6 @@ node_modules
 .env
 index2.js
 .gitignore
+
+index_refactored.js
+funds.js
