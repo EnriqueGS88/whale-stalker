@@ -9,5 +9,6 @@ export const companies = [
     "pianity-2d8b",
     "ar-io",
     "bundlr-network",
+    "consola-finance",
 
 ]

@@ -18,6 +18,8 @@ const header = [
 // Main Async function to scrape
  async function getObjects(){
     
+    companies.sort();
+
     let fundsByDate = [ ];
 
     for ( let i=0; i < companies.length; i++ ) {

@@ -14,3 +14,15 @@ npm i
 - Go to [redacted]
 - Select your whale funds
 - Monitor their moves daily
+
+Collect updated data from Crunchbase:
+
+```sh
+node index.js
+```
+
+Post data into Google Sheets
+
+```sh
+npm run dev
+```
