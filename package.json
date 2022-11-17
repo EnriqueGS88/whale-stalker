@@ -2,7 +2,7 @@
   "name": "whale-stalker",
   "version": "1.0.0",
   "description": "```sh\r git clone https://github.com/EnriqueGS88/whale-stalker.git\r npm i\r ```",
-  "main": "index.js",
+  "main": "sheets.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
