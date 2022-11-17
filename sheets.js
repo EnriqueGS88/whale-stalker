@@ -46,7 +46,9 @@ app.get("/", async (req, res) => {
       range: "Sheet1",
     });
   
+    console.log( getRows.data );
+
     res.send(getRows.data);
+
 });
-  
-  
+
