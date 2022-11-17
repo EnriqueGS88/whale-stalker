@@ -51,28 +51,35 @@ const header = [
         
         console.log( "funds: ", fundsUSD );
 
-        // Convert Array of Arrays into CSV
-        const csvFromArray = convertArrayToCSV( fundsByDate, {
-            header,
-            separator: ','
-        });
-
-        // Store CSV data into a file in ./output
-        async function saveFile ( f, d ) {
-            try{
-                await fs.outputFile( f, d );
-
-            } catch ( e ) {
-                console.error( e )
-            }
-        }
-
-        let filePath = `./output/crunchbase_${time.fileID}`;
-        saveFile( filePath, csvFromArray );
-  
+        
         await page.close();
         await browser.close();        
     }
+    
+    
+    // Convert Array of Arrays into CSV
+    const csvFromArray = convertArrayToCSV( fundsByDate, {
+        header,
+        separator: ','
+    });
+
+    // const csvFromArray = fundsByDate;
+
+    // Store CSV data into a file in ./output
+    async function saveFile ( f, d ) {
+        try{
+            await fs.outputFile( f, d );
+
+        } catch ( e ) {
+            console.error( e )
+        }
+    }
+
+    let filePath = `./output/crunchbase_${time.fileID}`;
+    saveFile( filePath, csvFromArray );
+
+
+
     // console.log( fundsByDate );        
 }
 
