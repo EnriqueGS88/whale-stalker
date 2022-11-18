@@ -24,5 +24,10 @@ node index.js
 Post data into Google Sheets
 
 ```sh
-npm run dev
+node post.js
+```
+
+Notify via Telegram
+```sh
+node post.js
 ```

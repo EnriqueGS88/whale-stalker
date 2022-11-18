@@ -1,12 +1,6 @@
-// import { auth } from 'google-auth-library';
 import { google } from 'googleapis';
 
-// import * as dotenv from 'dotenv';
-// dotenv.config();
-// const id = process.env.ID;
-
 const id = '1duDS9d22M2K_XfZyyeAk-1ARqD7rKvLusznFvViCXTI';
-
 
 // Authenticate to google api
 async function authSheets() {
