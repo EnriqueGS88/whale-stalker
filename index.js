@@ -1,10 +1,10 @@
-import { companies } from './companies.js';
 import puppeteer from 'puppeteer';
 import { convertArrayToCSV } from 'convert-array-to-csv';
-import fs from 'fs-extra';
 import converter from 'convert-array-to-csv';
-import { time } from './getTime.js';
-import { selectors } from './selectors.js';
+import fs from 'fs-extra';
+import { selectors } from './puppeteer/selectors.js';
+import { companies } from './puppeteer/companies.js';
+import { time } from './utils/getTime.js';
 import { convertToUSD, randomNumber } from './utils/convertToUSD.js';
 
 const header = [
@@ -72,12 +72,12 @@ async function delay( time ) {
     
     
     // Convert Array of Arrays into CSV
-    const csvFromArray = convertArrayToCSV( fundsByDate, {
+    const scrapeDataAsCSV = convertArrayToCSV( fundsByDate, {
         header,
         separator: ','
     });
 
-    // const csvFromArray = fundsByDate.toString();
+    const scrapeDataAsArray = JSON.stringify( fundsByDate );
 
     // Store CSV data into a file in ./output
     async function saveFile ( f, d ) {
@@ -89,8 +89,13 @@ async function delay( time ) {
         }
     }
 
-    let filePath = `./output/crunchbase_${time.fileID}`;
-    saveFile( filePath, csvFromArray );
+    let csvPath = `./output/crunchbase_${time.fileID}.csv`;
+    saveFile( csvPath, scrapeDataAsCSV );
+    
+    let arrayPath = `./output/crunchbase_${time.fileID}.js`;
+    saveFile( arrayPath, scrapeDataAsArray );
+
+
 
 
 
