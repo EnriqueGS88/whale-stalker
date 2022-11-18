@@ -1,5 +1,6 @@
 // import { auth } from 'google-auth-library';
 import { google } from 'googleapis';
+import { data } from './dataScraped.js';
 
 // import * as dotenv from 'dotenv';
 // dotenv.config();
@@ -38,10 +39,7 @@ async function postData() {
     range: "Sheet1",
     valueInputOption: "USER_ENTERED",
     resource: {
-      values: [
-        ["Wed", "F", "3"],
-        ["Thu", "M", "2"],
-    ],
+      values: data,
     },
   });
 
