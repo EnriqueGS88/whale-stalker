@@ -1,8 +1,5 @@
-// import { convertArrayToCSV } from 'convert-array-to-csv';
-// import converter from 'convert-array-to-csv';
 import { time } from './getTime.js';
 import fs from 'fs-extra';
-
 
 const arr = [
     [ "pA", "$1k", 1000, "some text" ],
