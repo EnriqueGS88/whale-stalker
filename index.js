@@ -77,7 +77,7 @@ async function delay( time ) {
         separator: ','
     });
 
-    const scrapeDataAsArray = JSON.stringify( fundsByDate );
+    const scrapeDataAsString = JSON.stringify( fundsByDate );
 
     // Store CSV data into a file in ./output
     async function saveFile ( f, d ) {
@@ -91,8 +91,12 @@ async function delay( time ) {
 
     let csvPath = `./output/crunchbase_${time.fileID}.csv`;
     saveFile( csvPath, scrapeDataAsCSV );
+
+
+    const prefix = "export const data = ";
+    const scrapeDataAsArray = prefix + JSON.stringify( scrapeDataAsString );
     
-    let arrayPath = `./output/crunchbase_${time.fileID}.js`;
+    let arrayPath = `./output/latestDataScraped.js`;
     saveFile( arrayPath, scrapeDataAsArray );
 
 

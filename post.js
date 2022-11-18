@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { data } from './dataScraped.js';
+import { data } from './output/latestDataScraped.js';
 
 const id = '1duDS9d22M2K_XfZyyeAk-1ARqD7rKvLusznFvViCXTI';
 

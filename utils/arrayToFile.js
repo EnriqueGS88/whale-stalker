@@ -7,7 +7,9 @@ const arr = [
     [ "pC", "$4k", 4000, "some gibberish" ],
 ]
 
-const string = JSON.stringify( arr );
+const prefix = "export const data = "
+
+const string = prefix + JSON.stringify( arr );
 
 // Store CSV data into a file in ./output
 async function saveFile ( f, d ) {
@@ -19,5 +21,8 @@ async function saveFile ( f, d ) {
     }
 }
 
-let filePath = `./output/arraySave_${time.fileID}.js`;
+let filePath = `../output/latestDataScraped.js`;
+
+console.log( "file saved" );
+
 saveFile( filePath, string );
