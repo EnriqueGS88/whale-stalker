@@ -5,16 +5,22 @@ import fs from 'fs-extra';
 import converter from 'convert-array-to-csv';
 import { time } from './getTime.js';
 import { selectors } from './selectors.js';
-import { convertToUSD } from './utils/convertToUSD.js';
+import { convertToUSD, randomNumber } from './utils/convertToUSD.js';
 
 const header = [
-        'date',
-        'company',
-        'amountText',
-        'amountUSD',
-        'description',
-    ];
-    
+    'date',
+    'company',
+    'amountText',
+    'amountUSD',
+    'description',
+];
+
+
+async function delay( time ) {
+    return new Promise(r => setTimeout(r, time ));
+}
+
+
 // Main Async function to scrape
  async function getObjects(){
     
@@ -22,9 +28,14 @@ const header = [
 
     let fundsByDate = [ ];
 
+
     for ( let i=0; i < companies.length; i++ ) {
         const investmentsURL = `https://www.crunchbase.com/organization/${ companies[i] }/recent_investments`
         const crunchbase = `https://www.crunchbase.com/organization/${ companies[i] }`;      
+        
+        // Random slow mo to bypass Bots Banners
+        let randomSlowMo = randomNumber( 50, 130 );
+
         const browser = await puppeteer.launch(
             {   
                 headless: false,
@@ -33,13 +44,16 @@ const header = [
                     height: 900,
                     deviceScaleFactor: 1,
                 },
-                slowMo:70
+                slowMo:randomSlowMo
             }
         );
             
         const context = await browser.createIncognitoBrowserContext();
         const page = await context.newPage();
         await page.goto( crunchbase );
+
+        // Random Delay to bypass Bots Banners
+        await delay( randomNumber( 1500, 4500 ) );
         
         let projectFunds = [ ];
 
@@ -63,7 +77,7 @@ const header = [
         separator: ','
     });
 
-    // const csvFromArray = fundsByDate;
+    // const csvFromArray = fundsByDate.toString();
 
     // Store CSV data into a file in ./output
     async function saveFile ( f, d ) {
