@@ -1,9 +1,11 @@
 import fs from 'fs-extra';
 
+let timestamp = Math.floor(Date.now() / 1000);
+
 const arr = [
-    [ "pA", "$1k", 1000, "some\n text" ],
-    [ "pB", "$3k", 3000, "some\n words" ],
-    [ "pC", "$4k", 4000, "some\n gibberish" ],
+    [ timestamp, "pA", "$1k", 1000, "some\n text" ],
+    [ timestamp, "pB", "$3k", 3000, "some\n words" ],
+    [ timestamp, "pC", "$4k", 4000, "some\n gibberish" ],
 ]
 
 const prefix = "export const data = ";

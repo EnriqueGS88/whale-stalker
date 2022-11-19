@@ -1,1 +1,1 @@
-export const data = [["pA","$1k",1000,"some\n text"],["pB","$3k",3000,"some\n words"],["pC","$4k",4000,"some\n gibberish"]]
+export const data = [[1668874086,"pA","$1k",1000,"some\n text"],[1668874086,"pB","$3k",3000,"some\n words"],[1668874086,"pC","$4k",4000,"some\n gibberish"]]

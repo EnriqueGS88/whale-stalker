@@ -77,11 +77,12 @@ async function delay( time ) {
         await delay( randomNumber( 1500, 4500 ) );
         
         let projectFunds = [ ];
+        let timestamp = Math.floor(Date.now() / 1000);
 
         const fundsRaised = await page.$eval( selectors.fundingAmount, e => e.innerText );
         const description = await page.$eval( selectors.description, e => e.innerText );
         const fundsUSD = convertToUSD( fundsRaised );
-        projectFunds.push( time.fileID, companies[i], fundsRaised, fundsUSD, description );
+        projectFunds.push( time.fileID, timestamp, companies[i], fundsRaised, fundsUSD, description );
         fundsByDate.push( projectFunds );  // This array will be converted into CSV
         
         console.log( "funds: ", fundsUSD );
