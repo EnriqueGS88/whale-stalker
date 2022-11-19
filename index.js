@@ -24,12 +24,13 @@ async function delay( time ) {
 // Main Async function to scrape
  async function getObjects(){
     
-    companies.sort();
+    // companies.sort();
 
     let fundsByDate = [ ];
 
 
-    for ( let i=0; i < companies.length; i++ ) {
+    // for ( let i=0; i < companies.length; i++ ) {
+    for ( let i=0; i < 2; i++ ) {
         const investmentsURL = `https://www.crunchbase.com/organization/${ companies[i] }/recent_investments`
         const crunchbase = `https://www.crunchbase.com/organization/${ companies[i] }`;      
         
@@ -52,6 +53,26 @@ async function delay( time ) {
         const page = await context.newPage();
         await page.goto( crunchbase );
 
+        console.log( "about to fake logo clicks" ); // Here plays the Bot Blocker
+        
+        // Fake click to disguise bot blocker
+        const logoSelector = 'div[class="provide-styling cb-image-with-placeholder"]';
+        await page.waitForSelector( logoSelector );
+        await delay( randomNumber( 1500, 4500 ) );
+        await page.click( logoSelector );
+        
+        console.log( "about to fake mouse moves" );
+        
+        // Fake mouse mouves to disguise bot blocker
+        const elem = await page.$( logoSelector);
+        const boundingBox = await elem.boundingBox();
+        await page.mouse.move(
+            boundingBox.x + boundingBox.width / 2,
+            boundingBox.y + boundingBox.height / 2
+            );
+        await page.mouse.wheel({deltaY: -100});
+            
+        console.log( "about to have a random lenght delay" );
         // Random Delay to bypass Bots Banners
         await delay( randomNumber( 1500, 4500 ) );
         
@@ -78,6 +99,9 @@ async function delay( time ) {
     });
 
     const scrapeDataAsString = JSON.stringify( fundsByDate );
+    console.log( "stringified: ", scrapeDataAsString );
+
+
 
     // Store CSV data into a file in ./output
     async function saveFile ( f, d ) {
@@ -95,7 +119,9 @@ async function delay( time ) {
 
     const prefix = "export const data = ";
     const scrapeDataAsArray = prefix + JSON.stringify( scrapeDataAsString );
-    
+    console.log( "prefixed: ", scrapeDataAsArray );
+
+
     let arrayPath = `./output/latestDataScraped.js`;
     saveFile( arrayPath, scrapeDataAsArray );
 

@@ -1,13 +1,12 @@
-import { time } from './getTime.js';
 import fs from 'fs-extra';
 
 const arr = [
-    [ "pA", "$1k", 1000, "some text" ],
-    [ "pB", "$3k", 3000, "some words" ],
-    [ "pC", "$4k", 4000, "some gibberish" ],
+    [ "pA", "$1k", 1000, "some\n text" ],
+    [ "pB", "$3k", 3000, "some\n words" ],
+    [ "pC", "$4k", 4000, "some\n gibberish" ],
 ]
 
-const prefix = "export const data = "
+const prefix = "export const data = ";
 
 const string = prefix + JSON.stringify( arr );
 
