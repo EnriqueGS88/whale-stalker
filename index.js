@@ -15,11 +15,9 @@ const header = [
     'description',
 ];
 
-
 async function delay( time ) {
     return new Promise(r => setTimeout(r, time ));
 }
-
 
 // Main Async function to scrape
  async function getObjects(){
@@ -27,7 +25,6 @@ async function delay( time ) {
     // companies.sort();
 
     let fundsByDate = [ ];
-
 
     for ( let i=0; i < companies.length; i++ ) {
     // for ( let i=0; i < 2; i++ ) {
@@ -86,12 +83,10 @@ async function delay( time ) {
         fundsByDate.push( projectFunds );  // This array will be converted into CSV
         
         console.log( "funds: ", fundsUSD );
-
         
         await page.close();
         await browser.close();        
     }
-    
     
     // Convert Array of Arrays into CSV
     const scrapeDataAsCSV = convertArrayToCSV( fundsByDate, {
@@ -101,8 +96,6 @@ async function delay( time ) {
 
     const scrapeDataAsString = JSON.stringify( fundsByDate );
     console.log( "stringified: ", scrapeDataAsString );
-
-
 
     // Store CSV data into a file in ./output
     async function saveFile ( f, d ) {
@@ -117,20 +110,13 @@ async function delay( time ) {
     let csvPath = `./output/crunchbase_${time.fileID}.csv`;
     saveFile( csvPath, scrapeDataAsCSV );
 
-
     const prefix = "export const data = ";
     const scrapeDataAsArray = prefix + scrapeDataAsString;
-    console.log( "prefixed: ", scrapeDataAsArray );
-
+    console.log( "data saved as JS array and CSV files" );
 
     let arrayPath = `./output/latestDataScraped.js`;
     saveFile( arrayPath, scrapeDataAsArray );
-
-
-
-
-
-    // console.log( fundsByDate );        
+   
 }
 
 getObjects();
