@@ -22,7 +22,7 @@ async function authSheets() {
 }
 
 // Post data to your Spreadsheet
-async function postData() {
+export async function postData() {
 
   const { sheets } = await authSheets();
 
