@@ -29,8 +29,8 @@ async function delay( time ) {
     let fundsByDate = [ ];
 
 
-    // for ( let i=0; i < companies.length; i++ ) {
-    for ( let i=0; i < 2; i++ ) {
+    for ( let i=0; i < companies.length; i++ ) {
+    // for ( let i=0; i < 2; i++ ) {
         const investmentsURL = `https://www.crunchbase.com/organization/${ companies[i] }/recent_investments`
         const crunchbase = `https://www.crunchbase.com/organization/${ companies[i] }`;      
         
@@ -119,7 +119,7 @@ async function delay( time ) {
 
 
     const prefix = "export const data = ";
-    const scrapeDataAsArray = prefix + JSON.stringify( scrapeDataAsString );
+    const scrapeDataAsArray = prefix + scrapeDataAsString;
     console.log( "prefixed: ", scrapeDataAsArray );
 
 
