@@ -6,7 +6,7 @@ import { selectors } from './puppeteer/selectors.js';
 import { companies } from './puppeteer/companies.js';
 import { time } from './utils/getTime.js';
 import { convertToUSD, randomNumber } from './utils/convertToUSD.js';
-import { postData } from "./post.js";
+// import { postData } from "./post.js";
 
 const header = [
     'date',
@@ -17,7 +17,7 @@ const header = [
 ];
 
 async function delay( time ) {
-    return new Promise(r => setTimeout(r, time ));
+    return new Promise( r => setTimeout( r, time ));
 }
 
 // Main Async function to scrape
@@ -118,7 +118,7 @@ async function delay( time ) {
     let arrayPath = `./output/latestDataScraped.js`;
     saveFile( arrayPath, scrapeDataAsArray );
 
-    await postData();
+    // await postData();
     console.log( "data posted to Google Sheets" );
    
 }
